@@ -1,0 +1,400 @@
+:root {
+    --primary-color: #f39c12; /* Naruto Orange */
+    --secondary-color: #2c3e50; /* Dark Blue/Grey */
+    --bg-color: #ecf0f1;
+    --card-bg: #ffffff;
+    --text-color: #333;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --radius: 12px;
+}
+
+.dark-theme {
+    --primary-color: #ff9500;
+    --secondary-color: #181a1b;
+    --bg-color: #23272b;
+    --card-bg: #181a1b;
+    --text-color: #f5f6fa;
+}
+
+.color-theme {
+    --primary-color: #8e44ad; /* Purple */
+    --secondary-color: #16a085; /* Teal */
+    --bg-color: #f5e6ff;
+    --card-bg: #e0f7fa;
+    --text-color: #222;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.logo {
+    max-width: 300px;
+    height: auto;
+    margin-bottom: 10px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+h1 {
+    color: var(--secondary-color);
+    margin-bottom: 10px;
+    font-size: 2.5rem;
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+select, button, input {
+    padding: 12px 20px;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    outline: none;
+}
+
+select {
+    min-width: 200px;
+    cursor: pointer;
+}
+
+input {
+    min-width: 200px;
+}
+
+button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+button:hover {
+    background-color: #e67e22;
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+/* Status Messages */
+#loading, #error {
+    text-align: center;
+    font-size: 1.2rem;
+    margin: 20px 0;
+    display: none;
+}
+
+#error {
+    color: #e74c3c;
+    background: #fadbd8;
+    padding: 10px;
+    border-radius: var(--radius);
+    max-width: 600px;
+    margin: 20px auto;
+}
+
+/* Grid Layout */
+.results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Single Result View (Search Mode) */
+.results-grid.single-result {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.results-grid.single-result .card {
+    max-width: 600px;
+    width: 100%;
+    height: auto; /* Allow card to grow for single result */
+    transform: none !important; /* Disable hover lift for the big card */
+}
+
+.results-grid.single-result .card-image {
+    height: 500px;
+    object-fit: contain;
+    background-color: #f9f9f9;
+    padding: 10px;
+}
+
+.results-grid.single-result .card-content {
+    text-align: center;
+    padding: 30px;
+}
+
+.results-grid.single-result .card-title {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.results-grid.single-result .card-detail {
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+}
+
+/* Card Styling */
+.card {
+    background-color: var(--card-bg);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    position: relative; /* For absolute positioning of overlay */
+    height: 250px; /* Fixed height for uniformity */
+    cursor: pointer;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.card-image {
+    width: 100%;
+    height: 100%; /* Fill the card */
+    object-fit: cover;
+    background-color: #ddd;
+    transition: transform 0.3s ease;
+}
+
+.card:hover .card-image {
+    transform: scale(1.05);
+}
+
+.card-image.placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #888;
+    font-size: 3rem;
+    height: 100%;
+}
+
+/* Name Overlay */
+.card-name-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 70%, rgba(0,0,0,0) 100%);
+    color: white;
+    padding: 20px 15px 10px 15px;
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+    z-index: 2;
+}
+
+/* Removed old card-content styles as they are no longer used in the grid view */
+
+
+.tag {
+    display: inline-block;
+    background: #eee;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    h1 { font-size: 2rem; }
+    .controls { flex-direction: column; align-items: center; }
+    select, button { width: 100%; max-width: 300px; }
+    
+    .results-grid.single-result .card-image {
+        height: 300px;
+    }
+}
+
+/* Modal Styles */
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1000; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.8); 
+    backdrop-filter: blur(5px);
+    animation: fadeIn 0.3s;
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 5% auto; 
+    padding: 0;
+    border-radius: 15px;
+    width: 80%; 
+    max-width: 900px;
+    box-shadow: 0 5px 30px rgba(0,0,0,0.3);
+    position: relative;
+    animation: slideIn 0.3s;
+    overflow: hidden;
+}
+
+.close-btn {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    z-index: 10;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-body {
+    display: flex;
+    flex-direction: column;
+    max-height: 85vh;
+    overflow-y: auto;
+}
+
+.modal-image-container {
+    flex: none;
+    width: 100%;
+    height: 400px;
+    background-color: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.modal-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+.modal-details {
+    flex: 1;
+    padding: 30px;
+    background: white;
+    z-index: 2;
+}
+
+#modalTitle {
+    margin-top: 0;
+    color: var(--secondary-color);
+    font-size: 2rem;
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.detail-section {
+    margin-bottom: 20px;
+}
+
+.detail-section h3 {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.detail-section p {
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.tag {
+    display: inline-block;
+    background-color: #eee;
+    padding: 4px 8px;
+    border-radius: 4px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {opacity: 0} 
+    to {opacity: 1}
+}
+
+@keyframes slideIn {
+    from {transform: translateY(-50px); opacity: 0;} 
+    to {transform: translateY(0); opacity: 1;}
+}
+
+/* Responsive Modal */
+@media (max-width: 768px) {
+    .modal-body {
+        flex-direction: column;
+    }
+    
+    .modal-image-container {
+        height: 250px;
+        flex: none;
+    }
+    
+    .modal-content {
+        width: 95%;
+        margin: 10% auto;
+    }
+}
+
+/* Card Hover Effect */
+.card {
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
