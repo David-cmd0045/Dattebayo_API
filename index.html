@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naruto Dattebayo API Explorer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div style="position: absolute; top: 20px; right: 20px; z-index: 10;">
+        <button id="theme-light" style="padding: 6px 14px; border-radius: 16px; border: none; background: #f39c12; color: #fff; font-weight: bold; cursor: pointer; margin-right: 4px;">Light</button>
+        <button id="theme-dark" style="padding: 6px 14px; border-radius: 16px; border: none; background: #23272b; color: #fff; font-weight: bold; cursor: pointer; margin-right: 4px;">Dark</button>
+        <button id="theme-color" style="padding: 6px 14px; border-radius: 16px; border: none; background: #8e44ad; color: #fff; font-weight: bold; cursor: pointer;">Color</button>
+    </div>
+
+    <header>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Naruto_logo.svg/1280px-Naruto_logo.svg.png" alt="Naruto Logo" class="logo">
+        <p>Explore the world of Naruto</p>
+    </header>
+
+    <div class="controls">
+        <select id="categorySelect">
+            <option value="characters">Characters</option>
+            <option value="akatsuki">Akatsuki</option>
+            <option value="clans">Clans</option>
+            <option value="kara">Kara</option>
+            <option value="kekkei-genkai">Kekkei Genkai</option>
+            <option value="tailed-beasts">Tailed Beasts</option>
+            <option value="teams">Teams</option>
+            <option value="villages">Villages</option>
+        </select>
+        <input type="text" id="searchInput" placeholder="Search by name...">
+    </div>
+
+    <div id="loading">Loading data from the Ninja World... </div>
+    <div id="error"></div>
+    
+    <div id="results" class="results-grid"></div>
+    <div style="text-align:center;margin:30px 0;">
+        <button id="loadMoreBtn" style="padding:10px 30px;border-radius:20px;font-size:1.1rem;background:#f39c12;color:#fff;border:none;cursor:pointer;display:none;">Load More</button>
+    </div>
+    <!-- Favorites Section -->
+    <div id="favorites" class="results-grid" style="margin-top: 40px;"></div>
+
+    <!-- Modal Structure -->
+    <div id="characterModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <div class="modal-body">
+                <div class="modal-image-container">
+                    <img id="modalImage" src="" alt="Character Image">
+                </div>
+                <div class="modal-details">
+                    <h2 id="modalTitle">Character Name</h2>
+                    <div id="modalInfo"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
